@@ -8,6 +8,9 @@
     <AssemblyName>FLExtender</AssemblyName>
     <RootNamespace>FLExtender</RootNamespace>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Folder Include="Config\" />
     <Folder Include="Localization\" />

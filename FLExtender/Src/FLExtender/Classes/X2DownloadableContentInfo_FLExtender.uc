@@ -8,7 +8,7 @@ static event OnPostTemplatesCreated()
 {
 	if (GetMaxFL() <= 20)
 	{
-		`RedSceen("FLExtender enabled but max FL is 20 or lower");
+		`RedScreen("FLExtender enabled but max FL is 20 or lower");
 		`warn("Max FL is 20 or lower",, 'FLExtender');
 		return;
 	}
@@ -29,7 +29,7 @@ static function PatchSchedules()
 	local MissionSchedule Schedule;
 	local int MaxFL, i;
 
-	if (DO_NOT_PATCH_SCHEDULES)
+	if (default.DO_NOT_PATCH_SCHEDULES)
 	{
 		return;
 	}
@@ -57,7 +57,7 @@ static function PatchDistributionLists()
 	local XComTacticalMissionManager MissionManager;
 	local int MaxFL, i, j;
 	
-	if (DO_NOT_PATCH_DISTRIBUTION_LISTS)
+	if (default.DO_NOT_PATCH_DISTRIBUTION_LISTS)
 	{
 		return;
 	}
@@ -84,7 +84,7 @@ static function PatchEncounters()
 	local XComTacticalMissionManager MissionManager;
 	local int MaxFL, i;
 	
-	if (DO_NOT_PATCH_ENCOUNTERS)
+	if (default.DO_NOT_PATCH_ENCOUNTERS)
 	{
 		return;
 	}
