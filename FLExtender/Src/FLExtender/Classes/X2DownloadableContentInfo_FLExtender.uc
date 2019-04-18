@@ -1,25 +1,104 @@
-//---------------------------------------------------------------------------------------
-//  FILE:   XComDownloadableContentInfo_FLExtender.uc                                    
-//           
-//	Use the X2DownloadableContentInfo class to specify unique mod behavior when the 
-//  player creates a new campaign or loads a saved game.
-//  
-//---------------------------------------------------------------------------------------
-//  Copyright (c) 2016 Firaxis Games, Inc. All rights reserved.
-//---------------------------------------------------------------------------------------
-
 class X2DownloadableContentInfo_FLExtender extends X2DownloadableContentInfo;
 
-/// <summary>
-/// This method is run if the player loads a saved game that was created prior to this DLC / Mod being installed, and allows the 
-/// DLC / Mod to perform custom processing in response. This will only be called once the first time a player loads a save that was
-/// create without the content installed. Subsequent saves will record that the content was installed.
-/// </summary>
-static event OnLoadedSavedGame()
-{}
+var config bool DO_NOT_PATCH_SCHEDULES;
+var config bool DO_NOT_PATCH_DISTRIBUTION_LISTS;
+var config bool DO_NOT_PATCH_ENCOUNTERS;
 
-/// <summary>
-/// Called when the player starts a new campaign while this DLC / Mod is installed
-/// </summary>
-static event InstallNewCampaign(XComGameState StartState)
-{}
+static event OnPostTemplatesCreated()
+{
+	if (GetMaxFL() <= 20)
+	{
+		`RedSceen("FLExtender enabled but max FL is 20 or lower");
+		`warn("Max FL is 20 or lower",, 'FLExtender');
+		return;
+	}
+
+	PatchSchedules();
+	PatchDistributionLists();
+	PatchEncounters();
+}
+
+static function int GetMaxFL()
+{
+	return class'XComGameState_HeadquartersAlien'.default.AlienHeadquarters_MaxForceLevel;
+}
+
+static function PatchSchedules()
+{
+	local XComTacticalMissionManager MissionManager;
+	local MissionSchedule Schedule;
+	local int MaxFL, i;
+
+	if (DO_NOT_PATCH_SCHEDULES)
+	{
+		return;
+	}
+
+	`log("Patching schedules",, 'FLExtender');
+
+	MissionManager = `TACTICALMISSIONMGR;
+	MaxFL = GetMaxFL();
+
+	for (i = 0; i < MissionManager.MissionSchedules.Length; i++)
+	{
+		Schedule = MissionManager.MissionSchedules[i];
+
+		if (Schedule.MaxRequiredForceLevel >= 20)
+		{
+			Schedule.MaxRequiredForceLevel = MaxFL;
+
+			MissionManager.MissionSchedules[i] = Schedule;
+		}
+	}
+}
+
+static function PatchDistributionLists()
+{
+	local XComTacticalMissionManager MissionManager;
+	local int MaxFL, i, j;
+	
+	if (DO_NOT_PATCH_DISTRIBUTION_LISTS)
+	{
+		return;
+	}
+
+	`log("Patching SpawnDistributionLists entries",, 'FLExtender');
+
+	MissionManager = `TACTICALMISSIONMGR;
+	MaxFL = GetMaxFL();
+
+	for (i = 0; i < MissionManager.SpawnDistributionLists.Length; i++)
+	{
+		for (j = 0; j < MissionManager.SpawnDistributionLists[i].SpawnDistribution.Length; j++)
+		{
+			if (MissionManager.SpawnDistributionLists[i].SpawnDistribution[j].MaxForceLevel >= 20)
+			{
+				MissionManager.SpawnDistributionLists[i].SpawnDistribution[j].MaxForceLevel = MaxFL;
+			}
+		}
+	}
+}
+
+static function PatchEncounters()
+{
+	local XComTacticalMissionManager MissionManager;
+	local int MaxFL, i;
+	
+	if (DO_NOT_PATCH_ENCOUNTERS)
+	{
+		return;
+	}
+
+	`log("Patching ConfigurableEncounters entries",, 'FLExtender');
+
+	MissionManager = `TACTICALMISSIONMGR;
+	MaxFL = GetMaxFL();
+
+	for (i = 0; i < MissionManager.ConfigurableEncounters.Length; i++)
+	{
+		if (MissionManager.ConfigurableEncounters[i].MaxRequiredForceLevel >= 20)
+		{
+			MissionManager.ConfigurableEncounters[i].MaxRequiredForceLevel = MaxFL;
+		}
+	}
+}

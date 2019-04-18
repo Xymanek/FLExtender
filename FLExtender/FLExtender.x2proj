@@ -16,6 +16,9 @@
     <Folder Include="Src\FLExtender\Classes\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Config\XComGameData.ini">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="ReadMe.txt" />
     <Content Include="ModPreview.jpg" />
     <Content Include="Config\XComEditor.ini" />
