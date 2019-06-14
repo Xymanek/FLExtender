@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # XCOM ModBuddy Solution File, Format Version 11.00
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{5DAE07AF-E217-45C1-8DE7-FF99D6011E8A}") = "FLExtender", "FLExtender\FLExtender.x2proj", "{AC3A3B9F-9D10-4062-BDBF-24720DE9E798}"
+Project("{5DAE07AF-E217-45C1-8DE7-FF99D6011E8A}") = "FLExtender", "FLExtender\FLExtender.x2proj", "{33343094-2201-46E7-BAC1-87CFB60E3CB6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Default|XCOM 2 = Default|XCOM 2
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AC3A3B9F-9D10-4062-BDBF-24720DE9E798}.Debug|XCOM 2.ActiveCfg = Debug|XCOM 2
-		{AC3A3B9F-9D10-4062-BDBF-24720DE9E798}.Debug|XCOM 2.Build.0 = Debug|XCOM 2
-		{AC3A3B9F-9D10-4062-BDBF-24720DE9E798}.Default|XCOM 2.ActiveCfg = Default|XCOM 2
-		{AC3A3B9F-9D10-4062-BDBF-24720DE9E798}.Default|XCOM 2.Build.0 = Default|XCOM 2
+		{33343094-2201-46E7-BAC1-87CFB60E3CB6}.Debug|XCOM 2.ActiveCfg = Debug|XCOM 2
+		{33343094-2201-46E7-BAC1-87CFB60E3CB6}.Debug|XCOM 2.Build.0 = Debug|XCOM 2
+		{33343094-2201-46E7-BAC1-87CFB60E3CB6}.Default|XCOM 2.ActiveCfg = Default|XCOM 2
+		{33343094-2201-46E7-BAC1-87CFB60E3CB6}.Default|XCOM 2.Build.0 = Default|XCOM 2
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
